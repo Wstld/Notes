@@ -2,12 +2,17 @@ package com.example.listapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
 import com.example.listapp.R
 import com.example.listapp.data.DataRepository
 import com.example.listapp.databinding.ActivityMainBinding
+import com.example.listapp.databinding.AddNoteDialogBinding
+import com.example.listapp.util.InjectorUtil
 import com.example.listapp.viewmodles.MainActivityViewModel
 import com.example.listapp.viewmodles.MainAcvtivityViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainActivityViewModel
@@ -17,8 +22,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repo = DataRepository()
-        val factory = MainAcvtivityViewModelFactory(repo)
+
+        val factory = InjectorUtil.getViewModelFactory()
         viewModel = ViewModelProvider(this,factory).get(
             MainActivityViewModel::class.java
         )
@@ -26,7 +31,19 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.materialButton.setOnClickListener {
-            viewModel.test(this)
+            val mDialogView = AddNoteDialogBinding.inflate(layoutInflater)
+            MaterialAlertDialogBuilder(this)
+                    .setView(mDialogView.root)
+                    .setTitle("ADD NOTE")
+                    .setPositiveButton("ok") { dialog, which ->
+                        val title = mDialogView.dialogTitle.text.toString()
+                        val date = mDialogView.dialogDate.text.toString()
+                        val body = mDialogView.dialogBody.text.toString()
+
+                        viewModel.addNote(title, date, body)
+
+                        dialog.cancel()
+                    }.show()
         }
 
 
