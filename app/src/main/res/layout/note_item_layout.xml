@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/post_it"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:backgroundTint="@color/post_it"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/note_headline"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:text="HEAD LINE"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/note_date"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:text="YYYY-MM-DD"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/note_body"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:maxLines="6"
+                android:ellipsize="end"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed laoreet sollicitudin ipsum, vitae molestie nunc placerat semper. Ut non turpis at nunc posuere tristique vehicula quis ipsum. Donec pulvinar vitae dui id euismod. Integer rutrum magna non justo consequat, id pretium ipsum elementum. Mauris posuere posuere ex finibus bibendum. Vestibulum aliquet lacus sapien, eget consequat eros pellentesque facilisis. Nullam gravida magna quis eros hendrerit rutrum. Sed pharetra purus vel elit laoreet mattis. Nulla condimentum velit id est interdum suscipit. Ut libero mi, posuere id ex et, laoreet mollis elit. Aliquam erat volutpat. Cras ut consectetur diam. Mauris sit amet magna rutrum, viverra justo at, bibendum elit. Quisque et nisl eget ipsum dictum molestie. Cras ultrices nisl id dolor euismod, a efficitur risus viverra. Vestibulum viverra mi a rhoncus maximus."
+                />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
