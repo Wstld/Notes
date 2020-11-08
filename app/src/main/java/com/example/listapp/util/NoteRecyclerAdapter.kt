@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listapp.data.Note
 
-class NoteRecyclerAdapter():ListAdapter<Note,NoteRecyclerAdapter.NoteViewHolder>(NoteListDiffUtilCallback) {
+class NoteRecyclerAdapter():ListAdapter<Note,NoteRecyclerAdapter.NoteViewHolder>(NoteListDiffUtilCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteRecyclerAdapter.NoteViewHolder {
         TODO("Not yet implemented")
     }
