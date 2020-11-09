@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listapp.R
 import com.example.listapp.data.DataRepository
 import com.example.listapp.databinding.ActivityMainBinding
 import com.example.listapp.databinding.AddNoteDialogBinding
 import com.example.listapp.util.InjectorUtil
+import com.example.listapp.util.NoteRecyclerAdapter
 import com.example.listapp.viewmodles.MainActivityViewModel
 import com.example.listapp.viewmodles.MainAcvtivityViewModelFactory
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -23,12 +25,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val factory = InjectorUtil.getViewModelFactory()
+        val factory = InjectorUtil.getViewModelFactory(application)
         viewModel = ViewModelProvider(this,factory).get(
             MainActivityViewModel::class.java
         )
 
-
+        initRecyclerView()
 
         binding.materialButton.setOnClickListener {
             val mDialogView = AddNoteDialogBinding.inflate(layoutInflater)
@@ -48,5 +50,20 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+    }
+    fun initRecyclerView(){
+        val noteList = viewModel.getListOfNotes()
+        val recyclerAdapter = NoteRecyclerAdapter()
+        binding.recyclerView.apply {
+            val layoutManager = LinearLayoutManager(this@MainActivity)
+            setLayoutManager(layoutManager)
+            layoutManager.reverseLayout = true
+            adapter = recyclerAdapter
+        }
+        noteList.observe(this,{
+            recyclerAdapter.submitList(noteList.value!!.toList())
+            binding.recyclerView.smoothScrollToPosition(noteList!!.value!!.size - 1)
+        })
     }
 }

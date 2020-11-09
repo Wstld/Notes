@@ -15,7 +15,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivityViewModel(private val repository: DataRepository):ViewModel() {
     fun addNote(title:String,date:String,body:String) {
-        val newNote = Note(title, date, body)
+        val newNote = Note(title = title,date =  date, body = body)
         repository.addNoteToDataBase(newNote)
     }
+    fun getListOfNotes() = repository.getListOfNotes()
+
 }
