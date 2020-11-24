@@ -42,9 +42,7 @@ class MainActivity : AppCompatActivity() {
                         val title = mDialogView.dialogTitle.text.toString()
                         val date = mDialogView.dialogDate.text.toString()
                         val body = mDialogView.dialogBody.text.toString()
-
-                        viewModel.addNote(title, date, body)
-
+                        viewModel.upSertNote(viewModel.createNote(title,date,body))
                         dialog.cancel()
                     }.show()
         }
@@ -55,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initRecyclerView(){
         val noteList = viewModel.getListOfNotes()
-        val recyclerAdapter = NoteRecyclerAdapter { Note -> viewModel.deleteNote(Note) }
+        val recyclerAdapter = NoteRecyclerAdapter ({ Note -> viewModel.deleteNote(Note) },{Note -> viewModel.updateNote(Note,this)})
         binding.recyclerView.apply {
             val layoutManager = LinearLayoutManager(this@MainActivity)
             setLayoutManager(layoutManager)
