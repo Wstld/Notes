@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listapp.R
 import com.example.listapp.data.DataRepository
+import com.example.listapp.data.Note
 import com.example.listapp.databinding.ActivityMainBinding
 import com.example.listapp.databinding.AddNoteDialogBinding
 import com.example.listapp.util.InjectorUtil
@@ -48,13 +49,13 @@ class MainActivity : AppCompatActivity() {
                     }.show()
         }
 
-
-
-
     }
+
+
+
     fun initRecyclerView(){
         val noteList = viewModel.getListOfNotes()
-        val recyclerAdapter = NoteRecyclerAdapter()
+        val recyclerAdapter = NoteRecyclerAdapter { Note -> viewModel.deleteNote(Note) }
         binding.recyclerView.apply {
             val layoutManager = LinearLayoutManager(this@MainActivity)
             setLayoutManager(layoutManager)

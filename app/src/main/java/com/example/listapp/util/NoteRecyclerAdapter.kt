@@ -11,7 +11,7 @@ import com.example.listapp.R
 import com.example.listapp.data.Note
 import com.example.listapp.databinding.NoteItemLayoutBinding
 
-class NoteRecyclerAdapter():ListAdapter<Note,NoteRecyclerAdapter.NoteViewHolder>(NoteListDiffUtilCallback()) {
+class NoteRecyclerAdapter(val onTrashClick:(Note) -> Unit):ListAdapter<Note,NoteRecyclerAdapter.NoteViewHolder>(NoteListDiffUtilCallback(),) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):NoteViewHolder {
         val itemBindning = NoteItemLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
@@ -20,10 +20,13 @@ class NoteRecyclerAdapter():ListAdapter<Note,NoteRecyclerAdapter.NoteViewHolder>
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        getItem(position).let {
-            holder.title.text = it.title
-            holder.body.text = it.body
-            holder.date.text = it.date
+        getItem(position).let { note ->
+            holder.title.text = note.title
+            holder.body.text = note.body
+            holder.date.text = note.date
+            holder.trasBtn.setOnClickListener {
+                onTrashClick(note)
+            }
         }
     }
 
@@ -33,6 +36,8 @@ class NoteRecyclerAdapter():ListAdapter<Note,NoteRecyclerAdapter.NoteViewHolder>
         var title = itemBinding.noteHeadline
         var body = itemBinding.noteBody
         var date = itemBinding.noteDate
+        val trasBtn = itemBinding.trashBtn
+
     }
 }
 

@@ -1,13 +1,12 @@
 package com.example.listapp.data;
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.Dispatchers
+
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import javax.sql.CommonDataSource
+
 
 class DataRepository(
     private val noteNoteDao: NoteDao
@@ -21,6 +20,11 @@ class DataRepository(
        GlobalScope.launch{
            noteNoteDao.addNote(note)
        }
+    }
+    fun deleteNoteFromDataBase(note: Note){
+        GlobalScope.launch {
+            noteNoteDao.deleteNote(note)
+        }
     }
 
     fun getListOfNotes() = noteRoomDataSource

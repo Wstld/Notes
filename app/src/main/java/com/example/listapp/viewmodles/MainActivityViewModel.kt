@@ -20,4 +20,12 @@ class MainActivityViewModel(private val repository: DataRepository):ViewModel() 
     }
     fun getListOfNotes() = repository.getListOfNotes()
 
+    fun deleteNote(note: Note) {
+        repository.deleteNoteFromDataBase(note)
+    }
+
+    fun onTrashClicked(note:Note){
+        deleteNote(note)
+    }
+
 }
